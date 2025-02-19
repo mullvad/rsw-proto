@@ -3,7 +3,7 @@ module github.com/mullvad/rsw-proto/ephemeralpeer
 go 1.23.5
 
 require (
-	google.golang.org/grpc v1.70.0
+	google.golang.org/grpc v1.69.4
 	google.golang.org/protobuf v1.36.4
 )
 
