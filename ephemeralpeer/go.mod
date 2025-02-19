@@ -1,6 +1,6 @@
 module github.com/mullvad/rsw-proto/ephemeralpeer
 
-go 1.23.5
+go 1.23.6
 
 require (
 	google.golang.org/grpc v1.69.4
