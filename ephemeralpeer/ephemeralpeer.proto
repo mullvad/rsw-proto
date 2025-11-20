@@ -70,6 +70,6 @@ message PostQuantumResponseV1 {
 
 message DaitaResponseV2 {
   repeated string client_machines = 1;
-  double max_padding_frac = 2;
-  double max_blocking_frac = 3;
+  double max_decoy_frac = 2;
+  double max_delay_frac = 3;
 }
