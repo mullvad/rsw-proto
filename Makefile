@@ -1,11 +1,15 @@
 .PHONY: build
 build: build-container
 	podman run --rm -v .:/build:Z -w /build \
-		-it rsw-proto $(MAKE) ephemeralpeer
+		-it rsw-proto $(MAKE) ephemeralpeer tunnelconfig
 
 .PHONY: ephemeralpeer
 ephemeralpeer:
 	$(MAKE) PROTO=ephemeralpeer/ephemeralpeer.proto grpc
+
+.PHONY: tunnelconfig
+tunnelconfig:
+	$(MAKE) PROTO=tunnelconfig/tunnelconfig.proto grpc
 
 .PHONY: grpc
 grpc:

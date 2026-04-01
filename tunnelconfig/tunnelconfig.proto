@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package tunnelconfig;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/mullvad/rsw-proto/tunnelconfig";
+
+service TunnelConfig {
+  rpc RegisterForNotificationsV1(NotificationRequestV1) returns (google.protobuf.Empty) {}
+}
+
+message NotificationRequestV1 {
+  // Pubkey that will be matched against an active tunnel.
+  bytes wg_pubkey = 1;
+  // UDP port where the client is listening for notifications.
+  // The relay will primarily address the client on its IPv4 in-tunnel IP.
+  // If no IPv4 address is known, which could be the case if RIPA is active,
+  // and the client has chosen to perform all in-tunnel communication using IPv6,
+  // then the relay instead addresses the client's IPv6 in-tunnel IP.
+  // Valid range of values is 1-65535.
+  uint32 port = 2;
+}
