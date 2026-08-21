@@ -27,7 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TunnelConfigClient interface {
-	RegisterForNotificationsV1(ctx context.Context, in *NotificationRequestV1, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	RegisterForNotificationsV1(ctx context.Context, in *RegisterForNotificationsRequestV1, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type tunnelConfigClient struct {
@@ -38,7 +38,7 @@ func NewTunnelConfigClient(cc grpc.ClientConnInterface) TunnelConfigClient {
 	return &tunnelConfigClient{cc}
 }
 
-func (c *tunnelConfigClient) RegisterForNotificationsV1(ctx context.Context, in *NotificationRequestV1, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *tunnelConfigClient) RegisterForNotificationsV1(ctx context.Context, in *RegisterForNotificationsRequestV1, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, TunnelConfig_RegisterForNotificationsV1_FullMethodName, in, out, cOpts...)
@@ -52,7 +52,7 @@ func (c *tunnelConfigClient) RegisterForNotificationsV1(ctx context.Context, in 
 // All implementations must embed UnimplementedTunnelConfigServer
 // for forward compatibility.
 type TunnelConfigServer interface {
-	RegisterForNotificationsV1(context.Context, *NotificationRequestV1) (*emptypb.Empty, error)
+	RegisterForNotificationsV1(context.Context, *RegisterForNotificationsRequestV1) (*emptypb.Empty, error)
 	mustEmbedUnimplementedTunnelConfigServer()
 }
 
@@ -63,7 +63,7 @@ type TunnelConfigServer interface {
 // pointer dereference when methods are called.
 type UnimplementedTunnelConfigServer struct{}
 
-func (UnimplementedTunnelConfigServer) RegisterForNotificationsV1(context.Context, *NotificationRequestV1) (*emptypb.Empty, error) {
+func (UnimplementedTunnelConfigServer) RegisterForNotificationsV1(context.Context, *RegisterForNotificationsRequestV1) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterForNotificationsV1 not implemented")
 }
 func (UnimplementedTunnelConfigServer) mustEmbedUnimplementedTunnelConfigServer() {}
@@ -88,7 +88,7 @@ func RegisterTunnelConfigServer(s grpc.ServiceRegistrar, srv TunnelConfigServer)
 }
 
 func _TunnelConfig_RegisterForNotificationsV1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NotificationRequestV1)
+	in := new(RegisterForNotificationsRequestV1)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ func _TunnelConfig_RegisterForNotificationsV1_Handler(srv interface{}, ctx conte
 		FullMethod: TunnelConfig_RegisterForNotificationsV1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TunnelConfigServer).RegisterForNotificationsV1(ctx, req.(*NotificationRequestV1))
+		return srv.(TunnelConfigServer).RegisterForNotificationsV1(ctx, req.(*RegisterForNotificationsRequestV1))
 	}
 	return interceptor(ctx, in, info, handler)
 }
